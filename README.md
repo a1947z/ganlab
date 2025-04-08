@@ -128,26 +128,19 @@ $ ./scripts/build-demo
 Stored bundle in output\bundle.js
 ```
 
-
-
-## 通过容器测试编译成果
-
-```bash
-docker run --rm -v $(pwd -W)/output:/usr/share/nginx/html -v $(pwd -W)/nginx.conf:/etc/nginx/conf.d/default.conf -p 5006:80  nginx:alpine
-```
 ## 制作容器镜像
 
 ```bash
-docker build -t jpynb-viewer .
+ docker build -t ganlab .
 ```
 
 ## 运行容器
 ```bash
-docker run -d -p 5004:80 -p 30018:30018 jpynb-viewer:latest
+docker run -it  -p 8080:8080 ganlab
 ```
 
 ## 在容器重测试成功之后，可以导出，然后上传发布
 
 ```bash
-docker save -o output/jpynb-viewer.tar jpynb-viewer:latest
+docker save -o output/ganlab.tar ganlab:latest
 ```
