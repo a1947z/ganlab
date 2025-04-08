@@ -54,7 +54,8 @@
     "@bower_components/webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.24",
     "@tensorflow/tfjs-core": "^0.12.0",
     "chart.js": "~2.7.1",
-    "tslint": "~5.8.0"
+    "tslint": "~5.8.0",
+    "yarn": "^1.22.22"
   },
   "repository": {
     "type": "git",

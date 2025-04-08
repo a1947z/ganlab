@@ -88,3 +88,66 @@ For more information, check out
 [Martin Wattenberg](http://www.bewitched.com/).
 "GAN Lab: Understanding Complex Deep Generative Models using Interactive Visual Experimentation."
 *IEEE Transactions on Visualization and Computer Graphics, 25(1) ([VAST 2018](http://ieeevis.org/year/2018/welcome))*, Jan. 2019.
+
+
+## 如何打包
+
+## 注意事项
+
+### 关于本地的Node环境
+这个程序采用本地编译，然后在将dist复制到容器的方式，所以要先确保你的本地环境是
+- node 8.17.0
+
+
+
+
+### 测试运行
+```
+$ ./scripts/watch-demo
+Waiting for initial compile...
+3310042 bytes written to demo\bundle.js (2.25 seconds) at 16:51:11
+Starting up http-server, serving ./
+Available on:
+  http://192.168.16.1:8080
+  http://192.168.56.1:8080
+  http://192.168.1.6:8080
+  http://127.0.0.1:8080
+Hit CTRL-C to stop the server
+```
+## 部署
+
+```bash
+$ ./scripts/deploy-demo
+Stored bundle in output/bundle.js
+Saved bundled demo at output/index.html
+```
+
+## 编译
+```bash
+$ ./scripts/build-demo
+Stored bundle in output\bundle.js
+```
+
+
+
+## 通过容器测试编译成果
+
+```bash
+docker run --rm -v $(pwd -W)/output:/usr/share/nginx/html -v $(pwd -W)/nginx.conf:/etc/nginx/conf.d/default.conf -p 5006:80  nginx:alpine
+```
+## 制作容器镜像
+
+```bash
+docker build -t jpynb-viewer .
+```
+
+## 运行容器
+```bash
+docker run -d -p 5004:80 -p 30018:30018 jpynb-viewer:latest
+```
+
+## 在容器重测试成功之后，可以导出，然后上传发布
+
+```bash
+docker save -o output/jpynb-viewer.tar jpynb-viewer:latest
+```
