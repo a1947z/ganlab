@@ -1,16 +1,19 @@
-# 使用 node:20 作为基础镜像
-FROM nginx:alpine
+FROM node:8.17.0
 
-# 将构建的前端文件复制到 Nginx 的默认目录
-COPY build /usr/share/nginx/html
+# 设置工作目录
+WORKDIR /app
 
-# 将自定义的 nginx 配置文件复制到容器中
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# 复制 package.json 和 package-lock.json
+COPY package*.json ./
 
+# 直接复制本地的 node_modules
+COPY node_modules ./node_modules
 
-# 暴露端口
-EXPOSE 80 30018
+# 复制项目文件
+COPY . .
 
-# 启动 nginx
-CMD ["nginx", "-g", "daemon off;"]
+# 设置执行权限（确保脚本可执行）
+RUN chmod +x scripts/watch-demo
 
+# 运行脚本
+CMD ["sh", "-c", "./scripts/watch-demo --no-browser"]

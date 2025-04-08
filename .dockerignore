@@ -1,8 +1,1 @@
-archieved/
-dev/
-doc/
-jupyter_server.log
-node_modules/
-script/
-.yarn/
-output/
+# /node_modules

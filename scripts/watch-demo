@@ -15,6 +15,9 @@
 // limitations under the License.
 // =============================================================================
 
+//这个程序其实是执行以下两条命令
+//node_modules/.bin/watchify demo/ganlab.ts -p [tsify -p tsconfig-dev.json] -v --debug -o demo/bundle.js
+//node_modules/.bin/http-server -c-1
 const path = require('path');
 const spawn = require('cross-spawn');
 const opn = require('opn');
@@ -40,6 +43,9 @@ watchify.stderr.pipe(process.stderr);
 
 let httpServerStarted = false;
 
+const args = process.argv.slice(2);
+const noBrowser = args.includes('--no-browser');
+
 console.log('Waiting for initial compile...');
 watchify.stderr.on('data', (data) => {
   if (data.toString().includes(`bytes written to`)) {
@@ -50,8 +56,12 @@ watchify.stderr.on('data', (data) => {
       httpServer.stdout.on('data', data => {
         data = data.toString().split('\n')[0].trim();
         if (data.startsWith('http://127.0.0.1:')) {
-          // Open a browser pointing to the demo.
-          opn(path.join(data, demoPath));
+          if (!noBrowser) {
+            // Open a browser pointing to the demo.
+            opn(path.join(data, demoPath));
+          } else {
+            console.log(`Server started. Access the application at: ${path.join(data, demoPath)}`);
+          }
         }
       });
 
