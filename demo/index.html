@@ -10,17 +10,17 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.9/dialog-polyfill.min.js"></script>
   <script src="../lib/support.js"></script>
   
-    <!-- Share card -->
+    <!-- 分享卡片 -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@minsukkahng" />
     <meta name="twitter:creator" content="@minsukkahng" />
     <meta property="og:url" content="https://poloclub.github.io/ganlab/" />
-    <meta property="og:title" content="GAN Lab" />
+    <meta property="og:title" content="GAN 实验室" />
     <meta property="og:description"
-      content="GAN Lab: Play with Generative Adversarial Networks in Your Browser!" />
+      content="GAN 实验室：在浏览器中体验生成对抗网络！" />
     <meta property="og:image" content="https://poloclub.github.io/ganlab/images/share.png" />
 
-  <title>GAN Lab: Play with Generative Adversarial Networks in Your Browser!</title>
+  <title>GAN 实验室：在浏览器中体验生成对抗网络！</title>
   <style>
     html {
       width: 100%;
@@ -180,11 +180,11 @@
   <div id="top-bar">
     <div id="top-bar-panel-container" class="panel-container">
       <div id="tool-description">
-        Play with Generative Adversarial Networks (GANs) in your browser!          
+        在浏览器中体验生成对抗网络（GANs）！          
       </div>
       <div id="source-link">
-        <a href="https://github.com/poloclub/ganlab" title="Source on GitHub">
-          Fork us on GitHub&nbsp;
+        <a href="https://github.com/poloclub/ganlab" title="GitHub 上的源代码">
+          在 GitHub 上 Fork 我们&nbsp;
           <img src="images/github-mark.png" />
         </a>
       </div>
@@ -193,242 +193,186 @@
       
   <div id="demo">
     <div id="loading">
-      Loading...
+      正在加载...
       <br />
-      <small>It may take a few tens of seconds.</small>
+      <small>可能需要几十秒的时间。</small>
     </div>
     <gan-lab></gan-lab>
   </div>
 
   <div id="description">
-    <h2>What is a GAN?</h2>
+    <h2>什么是 GAN？</h2>
     <p>
-      Many machine learning systems look at some kind of complicated input (say, an image) and produce a simple output (a label like, "cat"). By contrast, the goal of a generative model is something like the opposite: take a small piece of input&mdash;perhaps a few random numbers&mdash;and produce a complex output, like an image of a realistic-looking face. A <strong>generative adversarial network (GAN)</strong> is an especially effective type of generative model, <a href="https://arxiv.org/pdf/1406.2661.pdf" title="The original paper by Goodfellow et al. published in 2014">introduced only a few years ago</a>, which has been a subject of intense interest in the machine learning community. 
+      许多机器学习系统会处理复杂的输入（例如图像），并输出简单的结果（例如“猫”这样的标签）。相比之下，生成模型的目标则恰恰相反：它接受少量输入（可能是几个随机数），并生成复杂的输出，例如逼真的人脸图像。<strong>生成对抗网络（GAN）</strong>是一种特别有效的生成模型，<a href="https://arxiv.org/pdf/1406.2661.pdf" title="Goodfellow 等人于 2014 年发表的原始论文">它是在几年前被提出的</a>，在机器学习领域引起了广泛关注。 
     </p>
     
     <p>
-      You might wonder why we want a system that produces realistic images, or plausible simulations of any other kind of data. Besides the intrinsic intellectual challenge, this turns out to be a surprisingly handy tool, with <a href="https://arxiv.org/pdf/1701.00160.pdf" title="See page 4 of this tutorial paper">applications ranging from art to enhancing blurry images</a>.
+      你可能会好奇，为什么我们需要一个能够生成逼真图像或其他数据模拟的系统。除了内在的智力挑战外，事实证明，这是一个非常实用的工具，<a href="https://arxiv.org/pdf/1701.00160.pdf" title="请参阅本教程论文的第 4 页">其应用范围从艺术创作到模糊图像增强等</a>。
     </p>      
 
-    <h2>How does a GAN work?</h2>
+    <h2>GAN 是如何工作的？</h2>
     <p>
-      The idea of a machine "creating" realistic images from scratch can seem like magic, but GANs use <em>two key tricks</em> to turn a vague, seemingly impossible goal into reality.
+      机器“从零开始”创建逼真图像的想法似乎很神奇，但 GAN 使用了<em>两个关键技巧</em>，将一个看似不可能的模糊目标变为现实。
     </p>
     
     <p>
-      The first idea, not new to GANs, is to use <em>randomness</em> as an ingredient. At a basic level, this makes sense: it wouldn't be very exciting if you built a system that produced the same face each time it ran. Just as important, though, is that thinking in terms of probabilities also helps us translate the problem of generating images into a natural mathematical framework. We obviously don't want to pick images at uniformly at random, since that would just produce noise. Instead, we want our system to learn about which images are likely to be faces, and which aren't. Mathematically, this involves modeling a probability distribution on images, that is, a function that tells us which images are likely to be faces and which aren't. This type of problem&mdash;modeling a function on a high-dimensional space&mdash;is exactly the sort of thing neural networks are made for.
+      第一个想法并非 GAN 所独有，即使用<em>随机性</em>作为输入。从基本层面来看，这是有道理的：如果每次运行系统都生成相同的人脸，那就没什么意思了。同样重要的是，从概率的角度思考也有助于我们将图像生成问题转化为一个自然的数学框架。显然，我们不希望随机选择图像，因为这样只会产生噪声。相反，我们希望系统学习哪些图像可能是人脸，哪些不是。从数学上讲，这涉及对图像的概率分布进行建模，即一个函数，它告诉我们哪些图像可能是人脸，哪些不是。这类问题——在高维空间上对函数进行建模——正是神经网络擅长的。
     </p>
     
     <p>      
-      The big insights that defines a GAN is to set up this modeling problem as a kind of contest. This is where the "adversarial" part of the name comes from. The key idea is to build not one, but two competing networks: a <span style="color: var(--generator-color);"><strong>generator</strong></span> and a <span style="color: var(--discriminator-color);"><strong>discriminator</strong></span>. The generator tries to create random <span style="color: var(--generator-color);">synthetic outputs</span> (for instance, images of faces), while the discriminator tries to tell these apart from <span style="color: var(--real-data-color);">real outputs</span> (say, a database of celebrities). The hope is that as the two networks face off, they'll both get better and better&mdash;with the end result being a generator network that produces realistic outputs.
+      定义 GAN 的重大见解是将这个建模问题设置为一种竞赛。这就是“对抗”这个词的由来。关键思想是构建两个相互竞争的网络：一个<span style="color: var(--generator-color);"><strong>生成器</strong></span>和一个<span style="color: var(--discriminator-color);"><strong>判别器</strong></span>。生成器尝试创建随机的<span style="color: var(--generator-color);">合成输出</span>（例如人脸图像），而判别器则尝试将这些合成输出与<span style="color: var(--real-data-color);">真实输出</span>（例如名人数据库）区分开来。我们希望，随着这两个网络的对抗，它们都会变得越来越好——最终结果是一个能够生成逼真输出的生成器网络。
     </p>
     
     <p>      
-      To sum up: <strong><em>Generative adversarial networks</em></strong> are neural networks that learn to choose samples from a special distribution (the <em>"generative"</em> part of the name), and they do this by setting up a competition (hence <em>"adversarial"</em>).
+      总结一下：<strong><em>生成对抗网络</em></strong>是一种神经网络，它学习从特定分布中选择样本（这就是“生成”这个词的由来），并且通过设置竞争来实现这一点（因此称为“对抗”）。
     </p>
 
-    <h2>What's happening in the visualization?</h2>
+    <h2>可视化中展示了什么？</h2>
     <p>
-      GANs are complicated beasts, and the visualization has a lot going on. Here are the basic ideas.
+      GAN 是复杂的模型，可视化中包含了很多信息。以下是基本概念。
     </p>
     
     <p>
-      First, we're not visualizing anything as complex as generating realistic images. Instead, we're showing a GAN that learns a distribution of points in just <em>two dimensions</em>. There's no real application of something this simple, but it's much easier to show the system's mechanics. For one thing, probability distributions in plain old 2D (x,y) space are much easier to visualize than distributions in the space of high-resolution images.  
+      首先，我们并没有可视化像生成逼真图像这样复杂的内容。相反，我们展示的是一个学习二维空间中数据点分布的 GAN。虽然这种简单的模型没有实际应用，但它更容易展示系统的工作原理。一方面，二维（x, y）空间中的概率分布比高分辨率图像空间中的分布更容易可视化。  
     </p>
 
     <h4>
-      Pick a data distribution.
+      选择数据分布。
     </h4>
     
     <p>
-      At top, you can choose a probability distribution for GAN to learn, which we visualize as <span style="color: var(--real-data-color);">a set of data samples</span>. Once you choose one, we show them at two places: a smaller version in the <em>model overview graph</em> view on the left; and a larger version in the <em>layered distributions</em> view on the right.
+      在顶部，你可以选择一个 GAN 要学习的概率分布，我们将其可视化为<span style="color: var(--real-data-color);">一组数据样本</span>。选择后，我们会在两个地方显示它们：左边的<em>模型概览图</em>中显示较小的版本；右边的<em>分层分布</em>视图中显示较大的版本。
     </p>
     
     <div class="supporting-figure">
       <img src="figures/figure-data-selected.png" />
       <div class="figure-caption">
-        Figure 1. Selected data distribution is shown at two places.
+        图 1. 所选数据分布在两个地方显示。
       </div>
     </div>
     
     <p>
-      We designed the two views to help you better understand how a GAN works to generate realistic samples:
+      我们设计这两个视图是为了帮助你更好地理解 GAN 如何生成逼真的样本：
       <br />
-      (1) The <strong>model overview graph</strong> shows the architecture of a GAN, its major components and how they are connected, and also visualizes results produced by the components;
+      (1) <strong>模型概览图</strong>展示了 GAN 的架构、主要组件及其连接方式，还可视化了组件产生的结果；
       <br />
-      (2) The <strong>layered distributions</strong> view overlays the visualizations of the components from the model overview graph, so you can more easily compare the component outputs when analyzing the model.
+      (2) <strong>分层分布</strong>视图叠加了模型概览图中组件的可视化效果，这样在分析模型时，你可以更轻松地比较组件的输出。
     </p>
     
     <h4>
-      Let training begin.
+      开始训练。
     </h4>
     
     <p>
-      To start training the GAN model, click the play button (<img class="icon" src="figures/figure-icon-play.png" />) on the toolbar. Besides <span style="color: var(--real-data-color);">real samples</span>  from your chosen distribution, you'll also see <span style="color: var(--generator-color);">fake samples</span> that are generated by the model. Fake samples' positions continually updated as the training progresses. A perfect GAN will create fake samples whose distribution is indistinguishable from that of the real samples. When that happens, in the layered distributions view, you will see the two distributions nicely overlap.
+      要开始训练 GAN 模型，请点击工具栏上的播放按钮 (<img class="icon" src="figures/figure-icon-play.png" />)。除了从你选择的分布中获取的<span style="color: var(--real-data-color);">真实样本</span>，你还会看到模型生成的<span style="color: var(--generator-color);">假样本</span>。随着训练的进行，假样本的位置会不断更新。一个完美的 GAN 会生成与真实样本分布无法区分的假样本。当这种情况发生时，在分层分布视图中，你会看到两个分布完美重叠。
     </p>
     
     <div class="supporting-figure">
       <img src="figures/figure-animated-ring.gif" />
       <div class="figure-caption">
-        Figure 2. Fake samples' positions continually updated as the training progresses. Then, the distributions of the real and fake samples nicely overlap.
+        图 2. 随着训练的进行，假样本的位置不断更新。然后，真实样本和假样本的分布完美重叠。
       </div>
     </div>
     
     <h4>
-      Visualizing generator and discriminator.
+      可视化生成器和判别器。
     </h4>
     
     <p>
-      Recall that the <span style="color: var(--generator-color);">generator</span> and <span style="color: var(--discriminator-color);">discriminator</span> within a GAN is having a little contest, competing against each other, iteratively updating the <span style="color: var(--generator-color);">fake samples</span> to become more similar to the <span style="color: var(--real-data-color);">real ones</span>. GAN Lab visualizes the interactions between them. 
+      请记住，GAN 中的<span style="color: var(--generator-color);">生成器</span>和<span style="color: var(--discriminator-color);">判别器</span>正在进行一场小竞赛，它们相互对抗，迭代更新<span style="color: var(--generator-color);">假样本</span>，使其更接近<span style="color: var(--real-data-color);">真实样本</span>。GAN 实验室可视化了它们之间的交互。 
     </p>
     
     <p>
-      <strong>Generator.</strong>
-      As described earlier, the <span style="color: var(--generator-color);">generator</span> is a function that transforms a random input into a synthetic output. In GAN Lab, a random input is a 2D sample with a (x, y) value (drawn from a uniform or Gaussian distribution), and the output is also a 2D sample, but mapped into a different position, which is a <span style="color: var(--generator-color);">fake sample</span>. One way to visualize this mapping is using <em>manifold</em> <small><a href="http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/">[Olah, 2014]</a></small>. The input space is represented as a uniform square grid. As the function maps positions in the input space into new positions, if we visualize the output, the whole grid, now consisting of irregular quadrangles, would look like a warped version of the original regular grid. The area (or density) of each (warped) cell has now changed, and we encode the density as opacity, so a higher opacity means more samples in smaller space. A very fine-grained manifold will look almost the same as the visualization of the fake samples. This visualization shows how the generator learns a mapping function to make its output look similar to the distribution of the <span style="color: var(--real-data-color);">real samples</span>.
+      <strong>生成器。</strong>
+      如前所述，<span style="color: var(--generator-color);">生成器</span>是一个将随机输入转换为合成输出的函数。在 GAN 实验室中，随机输入是一个具有 (x, y) 值的二维样本（从均匀分布或高斯分布中抽取），输出也是一个二维样本，但映射到了不同的位置，即<span style="color: var(--generator-color);">假样本</span>。一种可视化这种映射的方法是使用<em>流形</em> <small><a href="http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/">[Olah, 2014]</a></small>。输入空间表示为一个均匀的正方形网格。当函数将输入空间中的位置映射到新位置时，如果我们可视化输出，整个网格（现在由不规则四边形组成）看起来就像原始规则网格的变形版本。每个（变形后的）单元格的面积（或密度）现在发生了变化，我们将密度编码为不透明度，因此不透明度越高意味着在更小的空间中有更多的样本。一个非常精细的流形看起来几乎与假样本的可视化相同。这种可视化展示了生成器如何学习一个映射函数，使其输出看起来与<span style="color: var(--real-data-color);">真实样本</span>的分布相似。
     </p>
     
     <div class="supporting-figure">
       <img src="figures/figure-generator-transformation.png" />
       <div class="figure-caption">
-        Figure 3. The generator's data transformation is visualized as a manifold, which turns input noise (leftmost) into fake samples (rightmost).
+        图 3. 生成器的数据转换被可视化为一个流形，它将输入噪声（最左边）转换为假样本（最右边）。
       </div>
     </div>
     
     <p>
-      <strong>Discriminator.</strong>
-      As the generator creates <span style="color: var(--generator-color);">fake samples</span>, the <span style="color: var(--discriminator-color);">discriminator</span>, a binary classifier, tries to tell them apart from the <span style="color: var(--real-data-color);">real samples</span>. GAN Lab visualizes its decision boundary as a 2D heatmap (similar to <a href="http://playground.tensorflow.org"><em>TensorFlow Playground</em></a>). The background colors of a grid cell encode the confidence values of the classifier's results. <span style="background-color: var(--real-data-color); color: white;">Darker green</span> means that samples in that region are more likely to be real; <span style="background-color: var(--generator-color); color: white;">darker purple</span>, more likely to be fake. As a GAN approaches the optimum, the whole heatmap will become more <span style="background-color: rgb(117, 117, 117); color: white;">gray</span> overall, signalling that the discriminator can no longer easily distinguish fake examples from the real ones.
+      <strong>判别器。</strong>
+      当生成器创建<span style="color: var(--generator-color);">假样本</span>时，<span style="color: var(--discriminator-color);">判别器</span>（一个二元分类器）尝试将它们与<span style="color: var(--real-data-color);">真实样本</span>区分开来。GAN 实验室将其决策边界可视化为一个二维热力图（类似于<a href="http://playground.tensorflow.org"><em>TensorFlow 游乐场</em></a>）。网格单元格的背景颜色编码了分类器结果的置信度值。<span style="background-color: var(--real-data-color); color: white;">深绿色</span>表示该区域的样本更有可能是真实的；<span style="background-color: var(--generator-color); color: white;">深紫色</span>表示更有可能是假的。当 GAN 接近最优状态时，整个热力图将整体变为<span style="background-color: rgb(117, 117, 117); color: white;">灰色</span>，这表明判别器无法再轻易区分假样本和真实样本。
     </p>
     
     <div class="supporting-figure">
       <img src="figures/figure-discriminator-heatmap.png" />
       <div class="figure-caption">
-        Figure 4. The discriminator's performance can be interpreted through a 2D heatmap. Here, the discriminator is performing well, since most real samples lies on its classification surface’s green region (and fake samples on purple region).
+        图 4. 判别器的性能可以通过二维热力图来解释。在这里，判别器表现良好，因为大多数真实样本位于其分类表面的绿色区域（假样本位于紫色区域）。
       </div>
     </div>
     
     <h4>
-      Understanding interplay between generator and discriminator.
+      理解生成器和判别器之间的相互作用。
     </h4>
     
     <p>
-      In a GAN, its two networks influence each other as they iteratively update themselves. A great use for GAN Lab is to use its visualization to learn how the <span style="color: var(--generator-color);">generator</span> incrementally updates to improve itself to generate fake samples that are increasingly more realistic. The generator does it by trying to fool the <span style="color: var(--discriminator-color);">discriminator</span>. The generator's loss value decreases when the discriminator classifies <span style="color: var(--generator-color);">fake samples</span> as <span style="color: var(--real-data-color);">real</span> (bad for discriminator, but good for generator). GAN Lab visualizes gradients (as <span style="color: var(--gradient-color);">pink lines</span>) for the fake samples such that the generator would achieve its success.
+      在 GAN 中，两个网络在迭代更新过程中相互影响。GAN 实验室的一个重要用途是通过其可视化来学习<span style="color: var(--generator-color);">生成器</span>如何逐步更新自己，以生成越来越逼真的假样本。生成器通过试图欺骗<span style="color: var(--discriminator-color);">判别器</span>来实现这一点。当判别器将<span style="color: var(--generator-color);">假样本</span>分类为<span style="color: var(--real-data-color);">真实样本</span>时，生成器的损失值会降低（这对判别器不利，但对生成器有利）。GAN 实验室将假样本的梯度可视化为<span style="color: var(--gradient-color);">粉色线条</span>，这样生成器就可以实现其目标。
     </p>
 
     <div class="supporting-figure">
       <img src="figures/figure-gradients-interplay.png" />
       <div class="figure-caption">
-        Figure 5. Fake samples' movement directions are indicated by the generator’s gradients (pink lines) based on those samples' current locations and the discriminator's curren classification surface (visualized by background colors).
+        图 5. 假样本的移动方向由生成器的梯度（粉色线条）指示，这些梯度基于样本的当前位置和判别器的当前分类表面（通过背景颜色可视化）。
       </div>
     </div>
     
     <p>
-      This way, the <span style="color: var(--generator-color);">generator</span> gradually improves to produce samples that are even more realistic. Once the fake samples are updated, the <span style="color: var(--discriminator-color);">discriminator</span> will update accordingly to finetune its decision boundary, and awaits the next batch of fake samples that try to fool itself. This iterative update process continues until the discriminator cannot tell <span style="color: var(--real-data-color);">real</span> and <span style="color: var(--generator-color);">fake</span> samples apart.
+      通过这种方式，<span style="color: var(--generator-color);">生成器</span>逐渐改进，以生成更逼真的样本。一旦假样本更新，<span style="color: var(--discriminator-color);">判别器</span>将相应地更新其决策边界，等待下一批试图欺骗它的假样本。这个迭代更新过程会一直持续，直到判别器无法区分<span style="color: var(--real-data-color);">真实</span>和<span style="color: var(--generator-color);">假</span>样本。
     </p>
     
     <h4>
-      Playing with interactive features.
+      体验交互式功能。
     </h4>
     
     <p>
-      GAN Lab has many cool features that support interactive experimentation.
+      GAN 实验室有许多很酷的功能，支持交互式实验。
       <dl>
         <dt>
-          Interactive hyperparameter adjustment
+          交互式超参数调整
         </dt>
         <dd>
-          Click the edit icon (<img class="icon" src="figures/figure-icon-edit.png" />) to reveal individual hyperparameters, and edit them on the fly during training.
+          点击编辑图标 (<img class="icon" src="figures/figure-icon-edit.png" />) 以显示各个超参数，并在训练过程中实时编辑它们。
         </dd>
         <dt>
-          User-defined data distribution
+          用户自定义数据分布
         </dt>
         <dd>
-          If you don't like our selection of distributions, draw your own by clicking the icon (<img class="icon" src="figures/figure-icon-draw.png" />) at the end of the data distributions list.
+          如果你不喜欢我们提供的分布选择，可以点击数据分布列表末尾的图标 (<img class="icon" src="figures/figure-icon-draw.png" />) 绘制自己的分布。
         </dd>
         <dt>
-          Slow-motion mode
+          慢动作模式
         </dt>
         <dd>
-          Lost track of the animation? Then you can slow it down by clicking the slow-motion icon (<img class="icon" src="figures/figure-icon-slow.png" />) to enter slow-mo. 
-          <a class="video-part-link" data-start="111" data-end="138">Check out this video</a>
+          跟不上动画的节奏？你可以点击慢动作图标 (<img class="icon" src="figures/figure-icon-slow.png" />) 进入慢动作模式。 
+          <a class="video-part-link" data-start="111" data-end="138">查看此视频</a>
         </dd>
         <dt>
-          Manual step-by-step execution
+          手动逐步执行
         </dt>
         <dd>
-          If you want more control, you can manually train individual iteration step by step by clicking the icon (<img class="icon" src="figures/figure-icon-step.png" />).
-          <a class="video-part-link" data-start="139" data-end="190">Check out this video</a>
+          如果你想要更多控制，可以点击图标 (<img class="icon" src="figures/figure-icon-step.png" />) 手动逐步训练单个迭代步骤。
+          <a class="video-part-link" data-start="139" data-end="190">查看此视频</a>
         </dd>
       </dl>
     </p>
     
+    <h2>它是如何实现的？</h2>
     <p>
-      Check out the following video for a quick look at GAN Lab's features.
-      <ul>
-        <li class="video-part-link" data-start="1" data-end="37">
-          Introduction of GAN Lab 
-          <small>(0:00-0:38)</small>
-        </li>
-        <li class="video-part-link" data-start="38" data-end="64">
-          Training of a simple distribution with hyperparameter adjustments 
-          <small>(0:38-1:05)</small>
-        </li>
-        <li class="video-part-link" data-start="65" data-end="110">
-          Training of a user-defined distribution
-          <small>(1:05-1:51)</small>
-        </li>
-        <li class="video-part-link" data-start="111" data-end="138">
-          Slow-motion mode 
-          <small>(1:51-2:19)</small>
-        </li>
-        <li class="video-part-link" data-start="139" data-end="190">
-          Manual step-by-step execution 
-          <small>(2:19-3:10)</small>
-        </li>
-      </ul>
-
-      <iframe id="video-demo-iframe" width="640" height="302" 
-        style="width: 640px;"
-        src="https://www.youtube.com/embed/eTq9T_sPTYQ?rel=0&amp;enablejsapi=1"
-        frameborder="0" allowfullscreen>
-      </iframe>
+      GAN 实验室使用了 <a href="https://js.tensorflow.org/"><em>TensorFlow.js</em></a>，这是一个在浏览器中运行的 GPU 加速深度学习库。从模型训练到可视化，一切都用 JavaScript 实现。你只需要像 Chrome 这样的浏览器就可以运行 GAN 实验室。我们的实现方法大大拓宽了人们使用深度学习交互式工具的途径。源代码可以在 <a href="https://github.com/poloclub/ganlab">GitHub</a> 上找到。
     </p>
 
-    <h2>How is it implemented?</h2>
+    <h2>谁开发了 GAN 实验室？</h2>
     <p>
-      GAN Lab uses <a href="https://js.tensorflow.org/"><em>TensorFlow.js</em></a>, 
-      an in-browser GPU-accelerated deep learning library. 
-      Everything, from model training to visualization, is implemented with 
-      JavaScript. You only need a web browser like Chrome to run GAN Lab.
-      Our implementation approach significantly broadens people's access to 
-      interactive tools for deep learning.
-      The source code is available on 
-      <a href="https://github.com/poloclub/ganlab">GitHub</a>.
-    </p>
-
-    <h2>Who developed GAN Lab?</h2>
-    <p>
-      GAN Lab was created by 
-      <a href="http://minsuk.com">Minsuk Kahng</a>,
-      <a href="https://twitter.com/nsthorat">Nikhil Thorat</a>, 
-      <a href="https://www.cc.gatech.edu/~dchau/">Polo Chau</a>, 
-      <a href="http://www.fernandaviegas.com/">Fernanda Viégas</a>, and 
-      <a href="http://www.bewitched.com/">Martin Wattenberg</a>,
-      which was the result of a research collaboration between 
-      Georgia Tech and Google
-      Brain/<a href="https://ai.google/research/teams/brain/pair">PAIR</a>.
-      We also thank Shan Carter and Daniel Smilkov, 
-      <a href="https://research.google.com/bigpicture/">
-        Google Big Picture team</a> and 
-      <a href="https://ai.google/research/teams/brain/pair">
-        Google People + AI Research (PAIR)</a>, and 
-      <a href="http://vis.gatech.edu/">Georgia Tech Visualization Lab</a> 
-      for their feedback.
+      GAN 实验室由 <a href="http://minsuk.com">Minsuk Kahng</a>、<a href="https://twitter.com/nsthorat">Nikhil Thorat</a>、<a href="https://www.cc.gatech.edu/~dchau/">Polo Chau</a>、<a href="http://www.fernandaviegas.com/">Fernanda Viégas</a> 和 <a href="http://www.bewitched.com/">Martin Wattenberg</a> 创建，这是佐治亚理工学院和谷歌 Brain/<a href="https://ai.google/research/teams/brain/pair">PAIR</a> 之间研究合作的成果。我们还感谢 Shan Carter 和 Daniel Smilkov、<a href="https://research.google.com/bigpicture/">谷歌大图景团队</a>、<a href="https://ai.google/research/teams/brain/pair">谷歌人机交互研究团队（PAIR）</a> 以及 <a href="http://vis.gatech.edu/">佐治亚理工学院可视化实验室</a> 提供的反馈。
     </p>
     
     <p style="margin-bottom: 0;">
-      For more information, check out 
-      <a href="http://minsuk.com/research/papers/kahng-ganlab-vast2018.pdf">
-        our research paper</a>:     
+      如需更多信息，请查看 <a href="http://minsuk.com/research/papers/kahng-ganlab-vast2018.pdf">我们的研究论文</a>：     
     </p>
 
     <a href="http://minsuk.com/research/papers/kahng-ganlab-vast2018.pdf">
@@ -436,16 +380,7 @@
     </a>
 
     <div class="citation">      
-      <a href="http://minsuk.com">Minsuk Kahng</a>,
-      <a href="https://twitter.com/nsthorat">Nikhil Thorat</a>, 
-      <a href="https://www.cc.gatech.edu/~dchau/">Polo Chau</a>, 
-      <a href="http://www.fernandaviegas.com/">Fernanda Viégas</a>, and 
-      <a href="http://www.bewitched.com/">Martin Wattenberg</a>.
-      "GAN Lab: Understanding Complex Deep Generative Models using 
-      Interactive Visual Experimentation."
-      <i>IEEE Transactions on Visualization and Computer Graphics, 25(1) 
-        (<a href="http://ieeevis.org/year/2018/welcome">VAST 2018</a>)</i>, 
-      Jan. 2019.
+      <a href="http://minsuk.com">Minsuk Kahng</a>、<a href="https://twitter.com/nsthorat">Nikhil Thorat</a>、<a href="https://www.cc.gatech.edu/~dchau/">Polo Chau</a>、<a href="http://www.fernandaviegas.com/">Fernanda Viégas</a> 和 <a href="http://www.bewitched.com/">Martin Wattenberg</a>。“GAN 实验室：通过交互式可视化实验理解复杂的深度生成模型。”<i>IEEE 可视化与计算机图形学汇刊，25(1) (<a href="http://ieeevis.org/year/2018/welcome">VAST 2018</a>)</i>，2019 年 1 月。
     </div>
   </div>
 
@@ -480,3 +415,4 @@
 </body>
 
 </html>
+    
