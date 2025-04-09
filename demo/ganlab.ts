@@ -1626,8 +1626,8 @@ class GANLab extends GANLabPolymer {
       this.costChart.destroy();
     }
     const costChartSpecification = [
-      { label: 'Discriminator\'s Loss', color: 'rgba(5, 117, 176, 0.5)' },
-      { label: 'Generator\'s Loss', color: 'rgba(123, 50, 148, 0.5)' }
+      { label: '判别器损失指标', color: 'rgba(5, 117, 176, 0.5)' },
+      { label: '生成器损失指标', color: 'rgba(123, 50, 148, 0.5)' }
     ];
     this.costChart = this.createChart(
       'cost-chart', this.costChartData, costChartSpecification, 0);
@@ -1640,8 +1640,8 @@ class GANLab extends GANLabPolymer {
       this.evalChart.destroy();
     }
     const evalChartSpecification = [
-      { label: 'KL Divergence (by grid)', color: 'rgba(220, 80, 20, 0.5)' },
-      { label: 'JS Divergence (by grid)', color: 'rgba(200, 150, 10, 0.5)' }
+      { label: 'KL散度（衡量差异性）', color: 'rgba(220, 80, 20, 0.5)' },
+      { label: 'JS散度 (衡量相似性)', color: 'rgba(200, 150, 10, 0.5)' }
     ];
     this.evalChart = this.createChart(
       'eval-chart', this.evalChartData, evalChartSpecification, 0);
