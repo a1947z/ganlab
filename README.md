@@ -142,5 +142,5 @@ docker run -it  -p 8080:8080 ganlab
 ## 在容器重测试成功之后，可以导出，然后上传发布
 
 ```bash
-docker save -o output/ganlab.tar ganlab:latest
+docker save -o dockerimages/ganlab.tar ganlab:latest
 ```
